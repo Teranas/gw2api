@@ -6,7 +6,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.use('underscore', ['client', 'server']);
+  api.use('underscore@1.0.3', ['client', 'server']);
   api.export('GW2API');
   api.addFiles("GW2API.js", 'server');
 });
