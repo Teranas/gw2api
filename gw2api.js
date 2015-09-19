@@ -181,7 +181,7 @@ GW2API =
     {
         var ids = firstID(options);
 
-        options['ids'] = null;
+        delete options['ids'];
 
         return GW2API.apiCall('characters/' + ids + "/inventory", options);
     },
@@ -201,7 +201,7 @@ GW2API =
     {
         var ids = firstID(options);
 
-        options['ids'] = null;
+        delete options['ids'];
 
         return GW2API.apiCall('characters/' + ids + "/equipment", options);
     },
@@ -222,7 +222,7 @@ GW2API =
     {
         var ids = firstID(options);
 
-        options['ids'] = null;
+        delete options['ids'];
 
         return GW2API.apiCall('characters/' + ids + "/recipes", options);
     },
@@ -243,7 +243,7 @@ GW2API =
     {
         var ids = firstID(options);
 
-        options['ids'] = null;
+        delete options['ids'];
 
         return GW2API.apiCall('characters/' + ids + "/specializations", options);
     },
@@ -278,7 +278,7 @@ GW2API =
         if (type !== 'coins' && type !== 'gems')
             throw new Meteor.Error(0, "Endpoint /commerce/exchange requires either type 'coins' or 'gems'.");
 
-        if (typeof quantity === 'undefined' || quantity === null)
+        if (!quantity)
             throw new Meteor.Error(0, "Endpoint /commerce/exchange requires a quantity attribute.");
 
         options['quantity'] = quantity;
@@ -421,7 +421,7 @@ GW2API =
     {
         var ids = firstID(options);
 
-        options['ids'] = null;
+        delete options['ids'];
 
         return GW2API.apiCall('guild/' + ids, options);
     },
@@ -441,7 +441,7 @@ GW2API =
     {
         var ids = firstID(options);
 
-        options['ids'] = null;
+        delete options['ids'];
 
         return GW2API.apiCall('guild/' + ids + '/inventory', options);
     },
@@ -461,7 +461,7 @@ GW2API =
     {
         var ids = firstID(options);
 
-        options['ids'] = null;
+        delete options['ids'];
 
         return GW2API.apiCall('guild/' + ids + '/log', options);
     },
@@ -481,7 +481,7 @@ GW2API =
     {
         var ids = firstID(options);
 
-        options['ids'] = null;
+        delete options['ids'];
 
         return GW2API.apiCall('guild/' + ids + '/members', options);
     },
@@ -501,7 +501,7 @@ GW2API =
     {
         var ids = firstID(options);
 
-        options['ids'] = null;
+        delete options['ids'];
 
         return GW2API.apiCall('guild/' + ids + '/ranks', options);
     },
@@ -521,7 +521,7 @@ GW2API =
     {
         var ids = firstID(options);
 
-        options['ids'] = null;
+        delete options['ids'];
 
         return GW2API.apiCall('guild/' + ids + '/permissions', options);
     },
@@ -541,7 +541,7 @@ GW2API =
     {
         var ids = firstID(options);
 
-        options['ids'] = null;
+        delete options['ids'];
 
         return GW2API.apiCall('guild/' + ids + '/upgrades', options);
     },
@@ -573,6 +573,34 @@ GW2API =
     getLeaderBoards: function (options)
     {
         return GW2API.apiCall('leaderboards', options);
+    },
+
+    /**
+     * Returns information about the maps of the game.
+     *
+     * @see http://wiki.guildwars2.com/wiki/API:2/maps
+     *
+     * @param {object} [options] - See {@link GW2API.apiCall}
+     *
+     * @throws Meteor.Error
+     */
+    getMaps: function (options)
+    {
+        return GW2API.apiCall('maps', options);
+    },
+
+    /**
+     * Returns information about the materials section of the account bank.
+     *
+     * @see http://wiki.guildwars2.com/wiki/API:2/materials
+     *
+     * @param {object} [options] - See {@link GW2API.apiCall}
+     *
+     * @throws Meteor.Error
+     */
+    getMaterials: function (options)
+    {
+        return GW2API.apiCall('materials', options);
     },
 
     /**
@@ -646,16 +674,16 @@ GW2API =
      */
     searchRecipes: function (input, output, options)
     {
-        if((input && output) || (options['input'] && options['output']))
+        if ((input && output) || (options['input'] && options['output']))
         {
             throw new Meteor.Error(0, "You cannot set both input and output. Define one and set the other to null," +
                 " false or undefined.");
         }
-        else if(input && !options['output'])
+        else if (input && !options['output'])
         {
             options['input'] = input;
         }
-        else if(output && !options['input'])
+        else if (output && !options['input'])
         {
             options['output'] = output;
         }
@@ -794,8 +822,10 @@ GW2API =
      * @param {string} options.key - The authentication key that grants access to the requested endpoint. Only
      *  needed for authenticated endpoints.
      * @param {string} options.language - Only available for endpoints with language awareness. Defines the
-     *  requested language. The API server will return the language that your browser provides when language is omitted.
-     * @param {int} options.quantity - Only available for endpoint v2/commerce/exchange. See {@link GW2API.getCommerceExchange}.
+     *  requested language. The API server will return the language that your browser provides when language is
+     *     omitted.
+     * @param {int} options.quantity - Only available for endpoint v2/commerce/exchange. See {@link
+        *     GW2API.getCommerceExchange}.
      * @param {int} options.input - Only available for endpoint v2/recipes/search. See {@link GW2API.searchRecipes}.
      * @param {int} options.output - Only available for endpoint v2/recipes/search. See {@link GW2API.searchRecipes}.
      *
@@ -805,40 +835,37 @@ GW2API =
      */
     apiCall: function (endpoint, options)
     {
-        if (typeof endpoint === 'undefined' || endpoint === null) throw new Meteor.Error(0, 'No endpoint set.');
+        if (!endpoint) throw new Meteor.Error(0, 'No endpoint set.');
 
-        if(options)
+        if (options)
         {
             var queryParameters = {};
 
             if (options['ids'])
-            {
                 queryParameters.ids = typeof options['ids'] === 'array' ? options['ids'].join(',') : options['ids'];
-            }
 
-            queryParameters['page'] = options['pageIndex'] ? options['pageIndex'] : null;
-            queryParameters['page_size'] = options['pageSize'] && options['pageSize'] <= GW2API.MAX_PAGE_SIZE ? options['pageSize'] : null;
-            queryParameters['access_token'] = options['key'] ? options['key'] : null;
-            queryParameters['lang'] = options['language'] ? options['language'] : null;
+            if (options['pageIndex'] && options['pageIndex'] >= 0)
+                queryParameters['page'] = options['pageIndex'];
+
+            if (options['pageSize'] && options['pageSize'] <= GW2API.MAX_PAGE_SIZE)
+                queryParameters['page_size'] = options['pageSize'];
+
+            if (options['key'])
+                queryParameters['access_token'] = options['key'];
+
+            if (options['language'])
+                queryParameters['lang'] = options['language'];
 
             /* Special parameters for certain endpoints */
 
             if (options['quantity'] && endpoint.indexOf('commerce/exchange') != -1)
-            {
                 queryParameters.quantity = options['quantity'];
-            }
 
             if (options['input'] && endpoint.indexOf('recipes/search') != -1)
-            {
                 queryParameters.input = options['input'];
-            }
 
             if (options['output'] && endpoint.indexOf('recipes/search') != -1)
-            {
                 queryParameters.output = options['output'];
-            }
-
-            queryParameters = Object.keys(queryParameters).length === 0 ? null : queryParameters;
         }
 
         var requestURL = GW2API.BASE_URL + '/' + GW2API.API_VERSION + '/' + endpoint;
@@ -851,7 +878,7 @@ GW2API =
         }
         else
         {
-            if (!options || typeof options['callback'] === 'undefined')
+            if (!options || typeof options['callback'] !== 'function')
                 throw new Meteor.Error(0, "GW2API calls need a callback on client side.");
 
             asyncCall(options['callback']);
@@ -859,9 +886,16 @@ GW2API =
 
         function httpRequest(callback)
         {
-            HTTP.get(requestURL, {
-                params: queryParameters
-            }, callback);
+            if (Object.keys(queryParameters).length === 0)
+            {
+                HTTP.get(requestURL, callback);
+            }
+            else
+            {
+                HTTP.get(requestURL, {
+                    params: queryParameters
+                }, callback);
+            }
         }
     }
 };

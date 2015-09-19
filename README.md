@@ -10,65 +10,11 @@ Simply run the following command inside your meteor project:
 
 `meteor add teranas:gw2api`
 
-You can now start using the API by calling functions od the global `GW2API` object.
-
-## Supported endpoints
-
-Endpoint                       | Function     | Note
----                            | ---          | ---     
-account                        | getAccount() |
-account/bank                   | getAccountBank() |
-account/dyes                   | getAccountDyes() |
-account/materials              | getAccountMaterials() |
-account/skins                  | getAccountSkins() |
-account/wallet                 | getAccountWallet() |
-achievements                   | *not implemented* | Unpublished endpoint
-build                          | getBuild() | 
-characters                     | getCharacters() | 
-characters/:id/equipment       | getCharacterEquipment() |
-characters/:id/inventory       | getCharacterInventory() | 
-characters/:id/recipes         | getCharacterRecipes() | Unpublished endpoint
-characters/:id/specializations | getCharacterSpecializations() |
-colors                         | getColors() | 
-commerce/exchange              | getCommerceExchange() |
-commerce/listings              | getCommerceListings() |
-commerce/prices                | getCommercePrices() | 
-commerce/transactions          | getCommerceTransactions() | 
-continents                     | getContinents() |
-currencies                     | getCurrencies() |
-events                         | getEvents() | Unpublished endpoint
-events-state                   | getEventsState() | Unpublished endpoint
-files                          | getFiles() |
-guild/:id                      | getGuild() | Unpublished endpoint
-guild/:id/inventory            | getGuildInventory()| Unpublished endpoint
-guild/:id/log                  | getGuildLog()| Unpublished endpoint
-guild/:id/members              | getGuildMembers()| Unpublished endpoint
-guild/:id/ranks                | getGuildRanks()| Unpublished endpoint
-guild/permissions              | getGuildPermissions()| Unpublished endpoint
-guild/upgrades                 | getGuildUpgrades()| Unpublished endpoint
-items                          | getItems() |
-leaderboards                   | getLeaderBoards() | Unpublished endpoint
-maps                           | getMaps() |
-materials                      | *not implemented* |
-pvp                            | *not implemented* | Implementation not necessary cause it only returns [games, stats]
-pvp/games                      | getPvPGames() |
-pvp/stats                      | getPvPStats() |
-quaggans                       | getQuaggans() |
-recipes                        | getRecipes() |
-recipes/search                 | searchRecipes() |
-skills                         | getSkills() | Unpublished endpoint
-skins                          | getSkins() |
-specializations                | getSpecialzation() |
-tokeninfo                      | getTokenInfo() |
-traits                         | getTraits() |
-traits-beta                    | getTraitsBeta() |
-worlds                         | getWorlds() |
-wvw/matches                    | getWvWMatches() | Unpublished endpoint
-wvw/objectives                 | getWvWObjectives() | Unpublished endpoint
+You can now start using the API by calling functions of the global `GW2API` object.
 
 ## The `options` object
 
-All functions accept an `option` object as last argument. This object can have the following properties:
+All functions accept an `options` object as last argument. This object can have the following properties:
 
 **callback** *function(err, result)*  (clientside)
 
@@ -231,3 +177,70 @@ The ``searchRecipes(input, output, options)`` function accepts additional parame
 2. ``output`` *int* - The id of an output item.
 
 *Note: It's not possible to provide multiple IDs. It's also not possible to provide both, input and output ids.*
+
+## Making custom requests
+
+The ``GW2API`` object provides a function called ``apiCall(endpoint, options)`` which is internally called by all functions.
+
+The ``endpoint`` parameter specifies the endpoint relative to the API v2 base url. That's currently ``https://api.guildwars2.com/v2/``.
+
+See [the ``options`` object](#the-options-object) for details about the second parameter.
+
+Please note: It's currently not possible to append custom HTTP request parameters.
+
+
+## Supported endpoints
+
+Please visit the official [Guild Wars 2 Wiki](https://wiki.guildwars2.com/wiki/API:Main) for details about the endpoints and their features (pagination, bulk and language awareness).
+
+Endpoint                       | Function     | Note
+---                            | ---          | ---     
+account                        | getAccount() |
+account/bank                   | getAccountBank() |
+account/dyes                   | getAccountDyes() |
+account/materials              | getAccountMaterials() |
+account/skins                  | getAccountSkins() |
+account/wallet                 | getAccountWallet() |
+achievements                   | *not implemented* | Unpublished endpoint
+build                          | getBuild() | 
+characters                     | getCharacters() | 
+characters/:id/equipment       | getCharacterEquipment() |
+characters/:id/inventory       | getCharacterInventory() | 
+characters/:id/recipes         | getCharacterRecipes() | Unpublished endpoint
+characters/:id/specializations | getCharacterSpecializations() |
+colors                         | getColors() | 
+commerce/exchange              | getCommerceExchange() | See [special functions](#special-functions)
+commerce/listings              | getCommerceListings() |
+commerce/prices                | getCommercePrices() | 
+commerce/transactions          | getCommerceTransactions() | 
+continents                     | getContinents() |
+currencies                     | getCurrencies() |
+events                         | getEvents() | Unpublished endpoint
+events-state                   | getEventsState() | Unpublished endpoint
+files                          | getFiles() |
+guild/:id                      | getGuild() | Unpublished endpoint
+guild/:id/inventory            | getGuildInventory()| Unpublished endpoint
+guild/:id/log                  | getGuildLog()| Unpublished endpoint
+guild/:id/members              | getGuildMembers()| Unpublished endpoint
+guild/:id/ranks                | getGuildRanks()| Unpublished endpoint
+guild/permissions              | getGuildPermissions()| Unpublished endpoint
+guild/upgrades                 | getGuildUpgrades()| Unpublished endpoint
+items                          | getItems() |
+leaderboards                   | getLeaderBoards() | Unpublished endpoint
+maps                           | getMaps() |
+materials                      | getMaterials() |
+pvp                            | *not implemented* | Implementation not necessary cause it only returns ``[games, stats]``
+pvp/games                      | getPvPGames() |
+pvp/stats                      | getPvPStats() |
+quaggans                       | getQuaggans() |
+recipes                        | getRecipes() |
+recipes/search                 | searchRecipes() | See [special functions](#special-functions)
+skills                         | getSkills() | Unpublished endpoint
+skins                          | getSkins() |
+specializations                | getSpecialzation() |
+tokeninfo                      | getTokenInfo() |
+traits                         | getTraits() |
+traits-beta                    | getTraitsBeta() |
+worlds                         | getWorlds() |
+wvw/matches                    | getWvWMatches() | Unpublished endpoint
+wvw/objectives                 | getWvWObjectives() | Unpublished endpoint
