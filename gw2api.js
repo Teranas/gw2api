@@ -813,7 +813,7 @@ GW2API =
      * @param {string} endpoint - The requested endpoint.
      * @param {object} options - The option object. Possible parameters:
      * @param {int} options.callback - Required on client side.
-     * @param {string|int|[int]|[string]} options.ids - The requested ids. Not available on endpoints without id in
+     * @param {(string|int|int[]|string[])} options.ids - The requested ids. Not available on endpoints without id in
      *  its result set. Either an array of ids or a comma-separated list of ids or a single id. Depending on the
      *  endpoint, it's also possible to provide alphanumerical ids such as GUIDs.
      * @param {int} options.pageIndex - Will request a specific page of a result set for endpoints with bulk enabled

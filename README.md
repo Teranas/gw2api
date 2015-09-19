@@ -4,6 +4,8 @@ This package provides a simple wrapper for most of the current and upcoming Guil
 
 It's supporting bulk requests, paged requests and language control.
 
+View the docs at https://teranas.github.io/gw2api.
+
 ## Installation
 
 Simply run the following command inside your meteor project:
