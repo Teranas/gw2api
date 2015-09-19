@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+
+    <h3></h3>
+
+
+    <section>
+        <article><h1>teranas:gw2api</h1>
+
+            <p>This package provides a simple wrapper for most of the current and upcoming Guild Wars 2 API
+                endpoints.</p>
+
+            <p>It's supporting bulk requests, paged requests and language control.</p>
+
+            <h2>Installation</h2>
+
+            <p>Simply run the following command inside your meteor project:</p>
+
+            <p><code>meteor add teranas:gw2api</code></p>
+
+            <p>You can now start using the API by calling functions of the global <code>GW2API</code> object.</p>
+
+            <h2>The <code>options</code> object</h2>
+
+            <p>All functions accept an <code>options</code> object as last argument. This object can have the following
+                properties:</p>
+
+            <p><strong>callback</strong> <em>function(err, result)</em> (clientside)</p>
+
+            <p>The callback parameter is required on clientside and will be ignored on server side.</p>
+
+            <p><strong>key</strong> <em>string</em> (authenticated endpoints)</p>
+
+            <p>The key parameter is required for authenticated requests. You have to provide a valid API access token
+                with the correct scopes to request certain information. </p>
+
+            <p><strong>ids</strong> <em>int, string, string[] or int[]</em> (optional)</p>
+
+            <p>You can set either one, multiple or no id, depending on the endpoint you want to request information
+                from.
+                <em>Note: You can only provide one id for all sub endpoints of the <code>character</code> endpoint.</em>
+            </p>
+
+            <p><strong>pageIndex</strong> <em>int</em> (optional, supported endpoints)</p>
+
+            <p>The pageIndex parameter can be set to force a paged output of the requested data. Index starts with
+                <code>0</code>. The size of the page will be <code>50</code> items by default.</p>
+
+            <p><strong>pageSize</strong> <em>int</em> (optional, supported endpoints)</p>
+
+            <p>The pageSize parameter can be set to define the limit of items returned per page.
+                There's a max limit of 200 items on api side.</p>
+
+            <p><strong>language</strong> <em>string</em> (optional, supported endpoints)</p>
+
+            <p>Overrides the output language with the provided two character language code. The API server tries to
+                determine the correct language when requesting from client side but falls back to english by
+                default.</p>
+
+            <h2>The result object</h2>
+
+            <p>Calling any <code>GW2API</code> function from server side will return the result object directly. On
+                client side is the exact same object stored within the second parameter of your callback function.</p>
+
+            <p>See the official <a href="http://docs.meteor.com/#/full/http_call">HTTP.call()</a> documentation for
+                details about the result object.</p>
+
+            <h2>Example</h2>
+
+            <h3>getBuild()</h3>
+
+            <p>Let's write a basic example:</p>
+            <h4>Server side</h4>
+            <pre class="prettyprint source"><code>console.log( GW2API.getBuild() );</code></pre>
+            <h4>Client side</h4><pre class="prettyprint source"><code>function printResult(error, result)
+                {
+                console.log(result);
+                }
+
+                GW2API.getBuild({
+                callback: printResult
+                });</code></pre>
+            <h4>Result</h4><pre class="prettyprint source"><code>{
+                statusCode: 200,
+                content: '{&quot;id&quot;:53120}',
+                headers: {
+                'content-length': '12',
+                'content-type': 'application/json; charset=utf-8',
+                server: 'Microsoft-IIS/7.5',
+                'access-control-allow-origin': '*',
+                'x-content-type-options': 'nosniff',
+                date: 'Fri, 18 Sep 2015 22:37:57 GMT'
+                },
+                data: {
+                id: 53120
+                }
+                }</code></pre>
+            <h3>getColors()</h3>
+
+            <p>A slightly advanced example:</p>
+            <h4>Server side</h4><pre class="prettyprint source"><code>console.log( GW2API.getColors({
+                pageIndex: 0,
+                pageSize: 2,
+                language: 'de'
+                }) );</code></pre>
+            <h4>Client side</h4><pre class="prettyprint source"><code>function printResult(error, result)
+                {
+                console.log(result);
+                }
+
+                GW2API.getBuild({
+                callback: printResult,
+                pageIndex: 0,
+                pageSize: 5,
+                language: 'de'
+                });</code></pre>
+            <h4>Result</h4><pre class="prettyprint source"><code>{
+                statusCode: 200,
+                content: '[{&quot;id&quot;:1,&quot;name&quot;:&quot;Farbentferner&quot;,&quot;base_rgb&quot;:[128,26,26],&quot;cloth&quot;:{&quot;brightness&quot;:15,&quot;contrast&quot;:1.25,&quot;hue&quot;:38,&quot;saturation&quot;:0.28125,&quot;lightness&quot;:1.44531,&quot;rgb&quot;:[124,108,83]},&quot;leather&quot;:{&quot;brightness&quot;:-8,&quot;contrast&quot;:1,&quot;hue&quot;:34,&quot;saturation&quot;:0.3125,&quot;lightness&quot;:1.09375,&quot;rgb&quot;:[65,49,29]},&quot;metal&quot;:{&quot;brightness&quot;:5,&quot;contrast&quot;:1.05469,&quot;hue&quot;:38,&quot;saturation&quot;:0.101563,&quot;lightness&quot;:1.36719,&quot;rgb&quot;:[96,91,83]}},{&quot;id&quot;:2,&quot;name&quot;:&quot;Schwarz&quot;,&quot;base_rgb&quot;:[128,26,26],&quot;cloth&quot;:{&quot;brightness&quot;:-13,&quot;contrast&quot;:1,&quot;hue&quot;:275,&quot;saturation&quot;:0.0234375,&quot;lightness&quot;:1.09375,&quot;rgb&quot;:[37,35,38]},&quot;leather&quot;:{&quot;brightness&quot;:-13,&quot;contrast&quot;:1,&quot;hue&quot;:275,&quot;saturation&quot;:0.0234375,&quot;lightness&quot;:1.09375,&quot;rgb&quot;:[37,35,38]},&quot;metal&quot;:{&quot;brightness&quot;:-13,&quot;contrast&quot;:1,&quot;hue&quot;:275,&quot;saturation&quot;:0.0234375,&quot;lightness&quot;:1.09375,&quot;rgb&quot;:[37,35,38]}}]',
+                headers: {
+                ...
+                'content-language': 'de',
+                'x-page-total': '240',
+                'x-page-size': '2',
+                'x-result-total': '480',
+                'x-result-count': '2',
+                ...
+                },
+                data: [{
+                id: 1,
+                name: 'Farbentferner',
+                base_rgb: [Object],
+                cloth: [Object],
+                leather: [Object],
+                metal: [Object]
+                }, {
+                id: 2,
+                name: 'Schwarz',
+                base_rgb: [Object],
+                cloth: [Object],
+                leather: [Object],
+                metal: [Object]
+                }]
+                }</code></pre>
+            <p>Have a look at the <code>headers</code> object. It contains some additional information such as <code>x-page-total</code>
+                which can be used to iterate over all available pages.</p>
+
+            <h2>Special functions</h2>
+
+            <p>There are some functions that accept additional parameters:</p>
+
+            <h3>getCommerceExchange(type, quantity, options)</h3>
+
+            <p>The <code>getCommerceExchange(type, quantity, options)</code> function accepts additional parameters:</p>
+            <ol>
+                <li><code>type</code> <em>string</em> - Either 'coins' or 'gems'. Specifies the source currency.</li>
+                <li><code>quantity</code> <em>int</em> - The quantity of the source currency.</li>
+            </ol>
+            <h3>searchRecipes(input, output, options)</h3>
+
+            <p>The <code>searchRecipes(input, output, options)</code> function accepts additional parameters:</p>
+            <ol>
+                <li><code>input</code> <em>int</em> - The id of an input item.</li>
+                <li><code>output</code> <em>int</em> - The id of an output item.</li>
+            </ol>
+            <p><em>Note: It's not possible to provide multiple IDs. It's also not possible to provide both, input and
+                output ids.</em></p>
+
+            <h2>Making custom requests</h2>
+
+            <p>The <code>GW2API</code> object provides a function called <code>apiCall(endpoint, options)</code> which
+                is internally called by all functions.</p>
+
+            <p>The <code>endpoint</code> parameter specifies the endpoint relative to the API v2 base url. That's
+                currently <code>https://api.guildwars2.com/v2/</code>.</p>
+
+            <p>See <a href="#the-options-object">the <code>options</code> object</a> for details about the second
+                parameter.</p>
+
+            <p>Please note: It's currently not possible to append custom HTTP request parameters.</p>
+
+            <h2>Supported endpoints</h2>
+
+            <p>Please visit the official <a href="https://wiki.guildwars2.com/wiki/API:Main">Guild Wars 2 Wiki</a> for
+                details about the endpoints and their features (pagination, bulk and language awareness).</p>
+            <table>
+                <thead>
+                <tr>
+                    <th>Endpoint</th>
+                    <th>Function</th>
+                    <th>Note</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>account</td>
+                    <td>getAccount()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>account/bank</td>
+                    <td>getAccountBank()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>account/dyes</td>
+                    <td>getAccountDyes()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>account/materials</td>
+                    <td>getAccountMaterials()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>account/skins</td>
+                    <td>getAccountSkins()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>account/wallet</td>
+                    <td>getAccountWallet()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>achievements</td>
+                    <td><em>not implemented</em></td>
+                    <td>Unpublished endpoint</td>
+                </tr>
+                <tr>
+                    <td>build</td>
+                    <td>getBuild()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>characters</td>
+                    <td>getCharacters()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>characters/:id/equipment</td>
+                    <td>getCharacterEquipment()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>characters/:id/inventory</td>
+                    <td>getCharacterInventory()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>characters/:id/recipes</td>
+                    <td>getCharacterRecipes()</td>
+                    <td>Unpublished endpoint</td>
+                </tr>
+                <tr>
+                    <td>characters/:id/specializations</td>
+                    <td>getCharacterSpecializations()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>colors</td>
+                    <td>getColors()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>commerce/exchange</td>
+                    <td>getCommerceExchange()</td>
+                    <td>See <a href="#special-functions">special functions</a></td>
+                </tr>
+                <tr>
+                    <td>commerce/listings</td>
+                    <td>getCommerceListings()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>commerce/prices</td>
+                    <td>getCommercePrices()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>commerce/transactions</td>
+                    <td>getCommerceTransactions()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>continents</td>
+                    <td>getContinents()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>currencies</td>
+                    <td>getCurrencies()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>events</td>
+                    <td>getEvents()</td>
+                    <td>Unpublished endpoint</td>
+                </tr>
+                <tr>
+                    <td>events-state</td>
+                    <td>getEventsState()</td>
+                    <td>Unpublished endpoint</td>
+                </tr>
+                <tr>
+                    <td>files</td>
+                    <td>getFiles()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>guild/:id</td>
+                    <td>getGuild()</td>
+                    <td>Unpublished endpoint</td>
+                </tr>
+                <tr>
+                    <td>guild/:id/inventory</td>
+                    <td>getGuildInventory()</td>
+                    <td>Unpublished endpoint</td>
+                </tr>
+                <tr>
+                    <td>guild/:id/log</td>
+                    <td>getGuildLog()</td>
+                    <td>Unpublished endpoint</td>
+                </tr>
+                <tr>
+                    <td>guild/:id/members</td>
+                    <td>getGuildMembers()</td>
+                    <td>Unpublished endpoint</td>
+                </tr>
+                <tr>
+                    <td>guild/:id/ranks</td>
+                    <td>getGuildRanks()</td>
+                    <td>Unpublished endpoint</td>
+                </tr>
+                <tr>
+                    <td>guild/permissions</td>
+                    <td>getGuildPermissions()</td>
+                    <td>Unpublished endpoint</td>
+                </tr>
+                <tr>
+                    <td>guild/upgrades</td>
+                    <td>getGuildUpgrades()</td>
+                    <td>Unpublished endpoint</td>
+                </tr>
+                <tr>
+                    <td>items</td>
+                    <td>getItems()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>leaderboards</td>
+                    <td>getLeaderBoards()</td>
+                    <td>Unpublished endpoint</td>
+                </tr>
+                <tr>
+                    <td>maps</td>
+                    <td>getMaps()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>materials</td>
+                    <td>getMaterials()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>pvp</td>
+                    <td><em>not implemented</em></td>
+                    <td>Implementation not necessary cause it only returns <code>[games, stats]</code></td>
+                </tr>
+                <tr>
+                    <td>pvp/games</td>
+                    <td>getPvPGames()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>pvp/stats</td>
+                    <td>getPvPStats()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>quaggans</td>
+                    <td>getQuaggans()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>recipes</td>
+                    <td>getRecipes()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>recipes/search</td>
+                    <td>searchRecipes()</td>
+                    <td>See <a href="#special-functions">special functions</a></td>
+                </tr>
+                <tr>
+                    <td>skills</td>
+                    <td>getSkills()</td>
+                    <td>Unpublished endpoint</td>
+                </tr>
+                <tr>
+                    <td>skins</td>
+                    <td>getSkins()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>specializations</td>
+                    <td>getSpecialzation()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>tokeninfo</td>
+                    <td>getTokenInfo()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>traits</td>
+                    <td>getTraits()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>traits-beta</td>
+                    <td>getTraitsBeta()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>worlds</td>
+                    <td>getWorlds()</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>wvw/matches</td>
+                    <td>getWvWMatches()</td>
+                    <td>Unpublished endpoint</td>
+                </tr>
+                <tr>
+                    <td>wvw/objectives</td>
+                    <td>getWvWObjectives()</td>
+                    <td>Unpublished endpoint</td>
+                </tr>
+                </tbody>
+            </table>
+        </article>
+    </section>
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2>
+
+    <h3>Namespaces</h3>
+    <ul>
+        <li><a href="GW2API.html">GW2API</a></li>
+    </ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Sat Sep 19 2015 15:38:35
+    GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
