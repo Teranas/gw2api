@@ -166,7 +166,9 @@
                 <li data-name="GW2API.getWvWObjectives"><a href="GW2API.html#.getWvWObjectives">getWvWObjectives</a></li>
             
                 <li data-name="GW2API.searchRecipes"><a href="GW2API.html#.searchRecipes">searchRecipes</a></li>
-            
+
+                <li data-name="GW2API.setErrorHandler"><a href="GW2API.html#.setErrorHandler">setErrorHandler</a></li>
+
             </ul>
             <ul class="events itemMembers">
             
@@ -260,7 +262,8 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id=".API_VERSION"><span class="type-signature static">static</span>GW2API.API_VERSION<span class="type-signature type string">string</span> </h4>
+            <h4 class="name" id=".API_VERSION"><span class="type-signature static">static,readonly</span>GW2API.API_VERSION<span
+                class="type-signature type string">string</span></h4>
     </div>
     
     
@@ -305,7 +308,9 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id=".BASE_URL"><span class="type-signature static">static</span>GW2API.BASE_URL<span class="type-signature type string">string</span> </h4>
+            <h4 class="name" id=".BASE_URL"><span
+                class="type-signature static">static,readonly</span>GW2API.BASE_URL<span
+                class="type-signature type string">string</span></h4>
     </div>
     
     
@@ -350,7 +355,8 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id=".DEFAULT_PAGE_SIZE"><span class="type-signature static">static</span>GW2API.DEFAULT_PAGE_SIZE<span class="type-signature type int">int</span> </h4>
+            <h4 class="name" id=".DEFAULT_PAGE_SIZE"><span class="type-signature static">static,readonly</span>GW2API.DEFAULT_PAGE_SIZE<span
+                class="type-signature type int">int</span></h4>
     </div>
     
     
@@ -395,7 +401,8 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id=".MAX_PAGE_SIZE"><span class="type-signature static">static</span>GW2API.MAX_PAGE_SIZE<span class="type-signature type int">int</span> </h4>
+            <h4 class="name" id=".MAX_PAGE_SIZE"><span class="type-signature static">static,readonly</span>GW2API.MAX_PAGE_SIZE<span
+                class="type-signature type int">int</span></h4>
     </div>
     
     
@@ -447,13 +454,16 @@
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".apiCall">
-            
-            <span class="type-signature static">static</span>GW2API.apiCall<span class="signature">(endpoint, options)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{object}</span>
+
+            <span class="type-signature static">static</span>GW2API.apiCall<span class="signature">(endpoint, <span
+            class="optional">options</span>, <span class="optional">callback</span>)</span><span
+            class="glyphicon glyphicon-circle-arrow-right"></span><span
+            class="type-signature returnType">{object}</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 836
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 1060
         </div>
         
     </div>
@@ -510,8 +520,9 @@
             
             
             <td class="description last">
-                
-                The requested endpoint.</td>
+
+
+            The requested endpoint.</td>
         </tr>
 	
 	
@@ -533,7 +544,11 @@
             
             
             <td class="description last">
-                
+
+
+                <span class="optional">optional</span>
+
+
                 The option object. Possible parameters:
                 
 
@@ -553,29 +568,6 @@
 	</thead>
 	
 	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">int</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                Required on client side.</td>
-        </tr>
-	
 	
 	
         <tr>
@@ -604,8 +596,14 @@
             
             
             <td class="description last">
-                
-                The requested ids. Not available on endpoints without id in its result set. Either an array of ids or a comma-separated list of ids or a single id. Depending on the endpoint, it's also possible to provide alphanumerical ids such as GUIDs.</td>
+
+
+                <span class="optional">optional</span>
+
+
+                The requested ids. Not available on endpoints without id in
+ its result set. Either an array of ids or a comma-separated list of ids or a single id. Depending on the
+ endpoint, it's also possible to provide alphanumerical ids such as GUIDs.</td>
         </tr>
 	
 	
@@ -627,8 +625,13 @@
             
             
             <td class="description last">
-                
-                Will request a specific page of a result set for endpoints with bulk enabled requests.</td>
+
+
+                <span class="optional">optional</span>
+
+
+                Will request a specific page of a result set for endpoints with bulk enabled
+ requests.</td>
         </tr>
 	
 	
@@ -650,8 +653,14 @@
             
             
             <td class="description last">
-                
-                The size of the requested pages. Needs to be set with <b>options.pageIndex</b>.</td>
+
+
+                <span class="optional">optional</span>
+
+
+                The size of the requested pages. Needs to be set with
+                <b>options.pageIndex</b>.
+            </td>
         </tr>
 	
 	
@@ -673,8 +682,13 @@
             
             
             <td class="description last">
-                
-                The authentication key that grants access to the requested endpoint. Only needed for authenticated endpoints.</td>
+
+
+                <span class="optional">optional</span>
+
+
+                The authentication key that grants access to the requested endpoint. Only
+ needed for authenticated endpoints.</td>
         </tr>
 	
 	
@@ -696,8 +710,14 @@
             
             
             <td class="description last">
-                
-                Only available for endpoints with language awareness. Defines the requested language. The API server will return the language that your browser provides when language is    omitted.</td>
+
+
+                <span class="optional">optional</span>
+
+
+                Only available for endpoints with language awareness. Defines the
+ requested language. The API server will return the language that your browser provides when language is
+    omitted.</td>
         </tr>
 	
 	
@@ -719,7 +739,11 @@
             
             
             <td class="description last">
-                
+
+
+                <span class="optional">optional</span>
+
+
                 Only available for endpoint v2/commerce/exchange. See <a href="GW2API.html#.getCommerceExchange">GW2API.getCommerceExchange</a>.</td>
         </tr>
 	
@@ -742,7 +766,11 @@
             
             
             <td class="description last">
-                
+
+
+                <span class="optional">optional</span>
+
+
                 Only available for endpoint v2/recipes/search. See <a href="GW2API.html#.searchRecipes">GW2API.searchRecipes</a>.</td>
         </tr>
 	
@@ -765,7 +793,11 @@
             
             
             <td class="description last">
-                
+
+
+                <span class="optional">optional</span>
+
+
                 Only available for endpoint v2/recipes/search. See <a href="GW2API.html#.searchRecipes">GW2API.searchRecipes</a>.</td>
         </tr>
 	
@@ -774,9 +806,36 @@
 </table>
             </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                A callback that will be called after the API sends a response. The function will
+                get two parameters <i>error</i> and <i>result</i>. See <a
+                href="http://docs.meteor.com/#/full/http_call">HTTP.call()</a> for details.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -818,8 +877,10 @@
             
 
     <div class="param-desc">
-    
-        Meteor.Error
+
+        Meteor.Error This function will throw any <a href="http://docs.meteor.com/#/full/http_call">HTTP.call()</a>
+        error untouched unless you override the error
+        handling with <a href="GW2API.html#.setErrorHandler">GW2API.setErrorHandler</a>.
     
     </div>
 
@@ -832,7 +893,8 @@
 
 
 <h5>Returns:</h5>
-the response object of the HTTP request.
+    result object of the HTTP request. See <a href="http://docs.meteor.com/#/full/http_call">HTTP.call()</a> for
+    details.
 <br />
 
     
@@ -845,13 +907,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getAccount">
-            
-            <span class="type-signature static">static</span>GW2API.getAccount<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getAccount<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 80
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 110
         </div>
         
     </div>
@@ -911,16 +974,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -987,13 +1073,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getAccountBank">
-            
-            <span class="type-signature static">static</span>GW2API.getAccountBank<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getAccountBank<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 94
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 125
         </div>
         
     </div>
@@ -1053,16 +1140,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -1129,13 +1239,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getAccountDyes">
-            
-            <span class="type-signature static">static</span>GW2API.getAccountDyes<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getAccountDyes<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 108
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 140
         </div>
         
     </div>
@@ -1195,16 +1306,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -1271,13 +1405,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getAccountMaterials">
-            
-            <span class="type-signature static">static</span>GW2API.getAccountMaterials<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getAccountMaterials<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 122
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 155
         </div>
         
     </div>
@@ -1337,16 +1472,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -1413,13 +1571,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getAccountSkins">
-            
-            <span class="type-signature static">static</span>GW2API.getAccountSkins<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getAccountSkins<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 136
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 170
         </div>
         
     </div>
@@ -1479,16 +1638,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -1555,13 +1737,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getAccountWallet">
-            
-            <span class="type-signature static">static</span>GW2API.getAccountWallet<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getAccountWallet<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 150
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 185
         </div>
         
     </div>
@@ -1621,16 +1804,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -1697,13 +1903,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getBuild">
-            
-            <span class="type-signature static">static</span>GW2API.getBuild<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getBuild<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 52
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 80
         </div>
         
     </div>
@@ -1763,16 +1970,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -1839,13 +2069,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getCharacterEquipment">
-            
-            <span class="type-signature static">static</span>GW2API.getCharacterEquipment<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getCharacterEquipment<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 200
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 251
         </div>
         
     </div>
@@ -1856,7 +2087,9 @@ the response object of the HTTP request.
     
     
     <div class="description">
-        Returns information about the equipment of a specific character of the account associated with the given key.This endpoint allows only one id (= character name) other ids will be omitted.
+        Returns information about the equipment of a specific character of the account associated with the given key.
+
+This endpoint allows only one id (= character name) other ids will be omitted.
     </div>
     
 
@@ -1905,16 +2138,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -1981,13 +2237,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getCharacterInventory">
-            
-            <span class="type-signature static">static</span>GW2API.getCharacterInventory<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getCharacterInventory<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 180
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 217
         </div>
         
     </div>
@@ -1998,7 +2255,9 @@ the response object of the HTTP request.
     
     
     <div class="description">
-        Returns information about the inventory of a specific character of the account associated with the given key.This endpoint allows only one id (= character name) other ids will be omitted.
+        Returns information about the inventory of a specific character of the account associated with the given key.
+
+This endpoint allows only one id (= character name) other ids will be omitted.
     </div>
     
 
@@ -2047,16 +2306,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -2123,13 +2405,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getCharacterRecipes">
-            
-            <span class="type-signature static">static</span>GW2API.getCharacterRecipes<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getCharacterRecipes<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 221
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 286
         </div>
         
     </div>
@@ -2140,7 +2423,10 @@ the response object of the HTTP request.
     
     
     <div class="description">
-        Returns information about the unlocked recipes of a specific character of the account associated with the givenkey.This endpoint allows only one id (= character name) other ids will be omitted.
+        Returns information about the unlocked recipes of a specific character of the account associated with the given
+key.
+
+This endpoint allows only one id (= character name) other ids will be omitted.
     </div>
     
 
@@ -2189,16 +2475,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -2265,13 +2574,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getCharacters">
-            
-            <span class="type-signature static">static</span>GW2API.getCharacters<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getCharacters<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 164
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 200
         </div>
         
     </div>
@@ -2331,16 +2641,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -2407,13 +2740,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getCharacterSpecializations">
-            
-            <span class="type-signature static">static</span>GW2API.getCharacterSpecializations<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getCharacterSpecializations<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 242
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 321
         </div>
         
     </div>
@@ -2424,7 +2758,10 @@ the response object of the HTTP request.
     
     
     <div class="description">
-        Returns information about the specializations of a specific character of the account associated with the givenkey.This endpoint allows only one id (= character name) other ids will be omitted.
+        Returns information about the specializations of a specific character of the account associated with the given
+key.
+
+This endpoint allows only one id (= character name) other ids will be omitted.
     </div>
     
 
@@ -2473,16 +2810,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -2549,13 +2909,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getColors">
-            
-            <span class="type-signature static">static</span>GW2API.getColors<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getColors<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 260
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 353
         </div>
         
     </div>
@@ -2615,16 +2976,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -2691,13 +3075,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getCommerceExchange">
-            
-            <span class="type-signature static">static</span>GW2API.getCommerceExchange<span class="signature">(type, quantity, <span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getCommerceExchange<span class="signature">(type, quantity, <span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 276
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 370
         </div>
         
     </div>
@@ -2813,16 +3198,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -2889,13 +3297,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getCommerceListings">
-            
-            <span class="type-signature static">static</span>GW2API.getCommerceListings<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getCommerceListings<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 298
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 393
         </div>
         
     </div>
@@ -2955,16 +3364,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -3031,13 +3463,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getCommercePrices">
-            
-            <span class="type-signature static">static</span>GW2API.getCommercePrices<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getCommercePrices<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 312
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 408
         </div>
         
     </div>
@@ -3097,16 +3530,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -3173,13 +3629,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getCommerceTransactions">
-            
-            <span class="type-signature static">static</span>GW2API.getCommerceTransactions<span class="signature">(scope, type, <span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getCommerceTransactions<span class="signature">(scope, type, <span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 328
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 425
         </div>
         
     </div>
@@ -3295,16 +3752,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -3371,13 +3851,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getContinents">
-            
-            <span class="type-signature static">static</span>GW2API.getContinents<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getContinents<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 348
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 446
         </div>
         
     </div>
@@ -3437,16 +3918,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -3513,13 +4017,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getCurrencies">
-            
-            <span class="type-signature static">static</span>GW2API.getCurrencies<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getCurrencies<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 362
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 461
         </div>
         
     </div>
@@ -3579,16 +4084,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -3655,13 +4183,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getEvents">
-            
-            <span class="type-signature static">static</span>GW2API.getEvents<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getEvents<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 376
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 476
         </div>
         
     </div>
@@ -3721,16 +4250,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -3797,13 +4349,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getEventsState">
-            
-            <span class="type-signature static">static</span>GW2API.getEventsState<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getEventsState<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 390
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 491
         </div>
         
     </div>
@@ -3863,16 +4416,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -3939,13 +4515,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getFiles">
-            
-            <span class="type-signature static">static</span>GW2API.getFiles<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getFiles<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 404
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 506
         </div>
         
     </div>
@@ -4005,16 +4582,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -4081,13 +4681,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getGuild">
-            
-            <span class="type-signature static">static</span>GW2API.getGuild<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getGuild<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 420
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 523
         </div>
         
     </div>
@@ -4098,7 +4699,9 @@ the response object of the HTTP request.
     
     
     <div class="description">
-        Returns information about a specific guild.This endpoint allows only one id. Other ids will be omitted.
+        Returns information about a specific guild.
+
+This endpoint allows only one id. Other ids will be omitted.
     </div>
     
 
@@ -4147,16 +4750,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -4223,13 +4849,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getGuildInventory">
-            
-            <span class="type-signature static">static</span>GW2API.getGuildInventory<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getGuildInventory<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 440
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 557
         </div>
         
     </div>
@@ -4240,7 +4867,9 @@ the response object of the HTTP request.
     
     
     <div class="description">
-        Returns information about the inventory of a specific guild.This endpoint allows only one id. Other ids will be omitted.
+        Returns information about the inventory of a specific guild.
+
+This endpoint allows only one id. Other ids will be omitted.
     </div>
     
 
@@ -4289,16 +4918,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -4365,13 +5017,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getGuildLog">
-            
-            <span class="type-signature static">static</span>GW2API.getGuildLog<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getGuildLog<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 460
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 591
         </div>
         
     </div>
@@ -4382,7 +5035,9 @@ the response object of the HTTP request.
     
     
     <div class="description">
-        Returns information about the log of a specific guild.This endpoint allows only one id. Other ids will be omitted.
+        Returns information about the log of a specific guild.
+
+This endpoint allows only one id. Other ids will be omitted.
     </div>
     
 
@@ -4431,16 +5086,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -4507,13 +5185,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getGuildMembers">
-            
-            <span class="type-signature static">static</span>GW2API.getGuildMembers<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getGuildMembers<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 480
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 625
         </div>
         
     </div>
@@ -4524,7 +5203,9 @@ the response object of the HTTP request.
     
     
     <div class="description">
-        Returns information about the roster of a specific guild.This endpoint allows only one id. Other ids will be omitted.
+        Returns information about the roster of a specific guild.
+
+This endpoint allows only one id. Other ids will be omitted.
     </div>
     
 
@@ -4573,16 +5254,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -4649,13 +5353,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getGuildPermissions">
-            
-            <span class="type-signature static">static</span>GW2API.getGuildPermissions<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getGuildPermissions<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 520
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 693
         </div>
         
     </div>
@@ -4666,7 +5371,9 @@ the response object of the HTTP request.
     
     
     <div class="description">
-        Returns information about the permissions of a specific guild.This endpoint allows only one id. Other ids will be omitted.
+        Returns information about the permissions of a specific guild.
+
+This endpoint allows only one id. Other ids will be omitted.
     </div>
     
 
@@ -4715,16 +5422,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -4791,13 +5521,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getGuildRanks">
-            
-            <span class="type-signature static">static</span>GW2API.getGuildRanks<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getGuildRanks<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 500
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 659
         </div>
         
     </div>
@@ -4808,7 +5539,9 @@ the response object of the HTTP request.
     
     
     <div class="description">
-        Returns information about the ranks of a specific guild.This endpoint allows only one id. Other ids will be omitted.
+        Returns information about the ranks of a specific guild.
+
+This endpoint allows only one id. Other ids will be omitted.
     </div>
     
 
@@ -4857,16 +5590,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -4933,13 +5689,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getGuildUpgrades">
-            
-            <span class="type-signature static">static</span>GW2API.getGuildUpgrades<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getGuildUpgrades<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 540
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 727
         </div>
         
     </div>
@@ -4950,7 +5707,9 @@ the response object of the HTTP request.
     
     
     <div class="description">
-        Returns information about the upgrades of a specific guild.This endpoint allows only one id. Other ids will be omitted.
+        Returns information about the upgrades of a specific guild.
+
+This endpoint allows only one id. Other ids will be omitted.
     </div>
     
 
@@ -4999,16 +5758,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -5075,13 +5857,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getItems">
-            
-            <span class="type-signature static">static</span>GW2API.getItems<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getItems<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 558
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 759
         </div>
         
     </div>
@@ -5141,16 +5924,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -5217,13 +6023,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getLeaderBoards">
-            
-            <span class="type-signature static">static</span>GW2API.getLeaderBoards<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getLeaderBoards<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 573
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 775
         </div>
         
     </div>
@@ -5283,16 +6090,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -5359,13 +6189,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getMaps">
-            
-            <span class="type-signature static">static</span>GW2API.getMaps<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getMaps<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 587
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 790
         </div>
         
     </div>
@@ -5425,16 +6256,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -5501,13 +6355,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getMaterials">
-            
-            <span class="type-signature static">static</span>GW2API.getMaterials<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getMaterials<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 601
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 805
         </div>
         
     </div>
@@ -5567,16 +6422,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -5643,13 +6521,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getPvPGames">
-            
-            <span class="type-signature static">static</span>GW2API.getPvPGames<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getPvPGames<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 629
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 835
         </div>
         
     </div>
@@ -5709,16 +6588,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -5785,13 +6687,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getPvPStats">
-            
-            <span class="type-signature static">static</span>GW2API.getPvPStats<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getPvPStats<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 615
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 820
         </div>
         
     </div>
@@ -5851,16 +6754,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -5927,13 +6853,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getQuaggans">
-            
-            <span class="type-signature static">static</span>GW2API.getQuaggans<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getQuaggans<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 643
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 850
         </div>
         
     </div>
@@ -5993,16 +6920,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -6069,13 +7019,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getRecipes">
-            
-            <span class="type-signature static">static</span>GW2API.getRecipes<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getRecipes<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 657
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 865
         </div>
         
     </div>
@@ -6135,16 +7086,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -6211,13 +7185,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getSkills">
-            
-            <span class="type-signature static">static</span>GW2API.getSkills<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getSkills<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 721
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 932
         </div>
         
     </div>
@@ -6277,16 +7252,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -6353,13 +7351,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getSkins">
-            
-            <span class="type-signature static">static</span>GW2API.getSkins<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getSkins<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 707
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 917
         </div>
         
     </div>
@@ -6419,16 +7418,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -6495,13 +7517,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getSpecializations">
-            
-            <span class="type-signature static">static</span>GW2API.getSpecializations<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getSpecializations<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 735
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 947
         </div>
         
     </div>
@@ -6561,16 +7584,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -6637,13 +7683,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getTokenInfo">
-            
-            <span class="type-signature static">static</span>GW2API.getTokenInfo<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getTokenInfo<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 66
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 95
         </div>
         
     </div>
@@ -6703,16 +7750,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -6779,13 +7849,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getTraits">
-            
-            <span class="type-signature static">static</span>GW2API.getTraits<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getTraits<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 749
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 962
         </div>
         
     </div>
@@ -6845,16 +7916,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -6921,13 +8015,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getTraitsBeta">
-            
-            <span class="type-signature static">static</span>GW2API.getTraitsBeta<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getTraitsBeta<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 763
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 977
         </div>
         
     </div>
@@ -6987,16 +8082,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -7063,13 +8181,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getWorlds">
-            
-            <span class="type-signature static">static</span>GW2API.getWorlds<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getWorlds<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 777
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 992
         </div>
         
     </div>
@@ -7129,16 +8248,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -7205,13 +8347,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getWvWMatches">
-            
-            <span class="type-signature static">static</span>GW2API.getWvWMatches<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getWvWMatches<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 791
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 1007
         </div>
         
     </div>
@@ -7271,16 +8414,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -7347,13 +8513,15 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".getWvWObjectives">
-            
-            <span class="type-signature static">static</span>GW2API.getWvWObjectives<span class="signature">(<span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.getWvWObjectives<span class="signature">(<span
+            class="optional">options</span>, <span class="optional">callback</span>, <span
+            class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 805
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 1023
         </div>
         
     </div>
@@ -7413,16 +8581,64 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>..
+            </td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -7489,13 +8705,14 @@ the response object of the HTTP request.
 <dt>
     <div class="nameContainer">
         <h4 class="name" id=".searchRecipes">
-            
-            <span class="type-signature static">static</span>GW2API.searchRecipes<span class="signature">(input, output, <span class="optional">options</span>)</span>
+
+            <span class="type-signature static">static</span>GW2API.searchRecipes<span class="signature">(input, output, <span
+            class="optional">options</span>, <span class="optional">callback</span>)</span>
         </h4>
     
         
         <div class="tag-source">
-            E:/Projekte/Guild Wars 2/gw2api/gw2api.js, line 675
+            E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 884
         </div>
         
     </div>
@@ -7506,7 +8723,9 @@ the response object of the HTTP request.
     
     
     <div class="description">
-        Returns information ids of crafting recipes with the involved input or output material specified by parameters.<b>IMPORTANT:</b> It's not possible to provide multiple ids nor setting both output and output.
+        Returns ids of crafting recipes with the involved input or output material specified by parameters.
+
+<b>IMPORTANT:</b> It's not possible to provide multiple ids nor setting both output and output.
     </div>
     
 
@@ -7611,16 +8830,39 @@ the response object of the HTTP request.
                 
                     
                         <span class="optional">optional</span>
-                    
-                    
-                        
-                    
-                
-                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a></td>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
         </tr>
-	
-	
-	</tbody>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">
+
+
+                <span class="optional">optional</span>
+
+
+                See <a href="GW2API.html#.apiCall">GW2API.apiCall</a>.
+            </td>
+        </tr>
+
+
+    </tbody>
 </table>
     
     
@@ -7682,6 +8924,83 @@ the response object of the HTTP request.
     
 </dd>
 
+
+            <dt>
+            <div class="nameContainer">
+                <h4 class="name" id=".setErrorHandler">
+
+                    <span class="type-signature static">static</span>GW2API.setErrorHandler<span class="signature">(errorHandler)</span>
+                </h4>
+
+
+                <div class="tag-source">
+                    E:/Projekte/Guild Wars 2/guild-viewer/packages/gw2api/gw2api.js, line 1150
+                </div>
+
+            </div>
+
+
+            </dt>
+            <dd>
+
+
+                <div class="description">
+                    This function will set an error handler that handles any error that is thrown by <a
+                    href="http://docs.meteor.com/#/full/http_call">HTTP.call()</a>.
+                </div>
+
+
+                <table class="params">
+                    <thead>
+                    <tr>
+
+                        <th>Name</th>
+
+
+                        <th>Type</th>
+
+
+                        <th class="last">Description</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+
+                    <tr>
+
+                        <td class="name"><code>errorHandler</code></td>
+
+
+                        <td class="type">
+
+
+                            <span class="param-type">function</span>
+
+
+                        </td>
+
+
+                        <td class="description last">
+
+                            The error handler. The function will receive any error thrown by <a
+                            href="http://docs.meteor.com/#/full/http_call">HTTP.call()</a>.
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+
+
+                <dl class="details">
+
+
+                </dl>
+
+
+            </dd>
+
         </dl>
     
     
@@ -7703,7 +9022,8 @@ the response object of the HTTP request.
         <!-- // disqus code -->
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Sat Sep 19 2015 15:59:39 GMT+0200 (Mitteleuropäische Sommerzeit)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Fri Sep 25 2015
+            21:40:44 GMT+0200 (Mitteleuropäische Sommerzeit)
         </footer>
     </div>
 </div>

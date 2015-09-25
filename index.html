@@ -19,7 +19,7 @@
     <script src="scripts/prettify/lang-css.js"></script>
     <script src="scripts/jquery.min.js"></script>
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
     <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
@@ -193,6 +193,9 @@
 
                     <li data-name="GW2API.searchRecipes"><a href="GW2API.html#.searchRecipes">searchRecipes</a></li>
 
+                    <li data-name="GW2API.setErrorHandler"><a href="GW2API.html#.setErrorHandler">setErrorHandler</a>
+                    </li>
+
                 </ul>
                 <ul class="events itemMembers">
 
@@ -224,21 +227,21 @@
 
                 <p>You can now start using the API by calling functions of the global <code>GW2API</code> object.</p>
 
-                <h2>The <code>options</code> object</h2>
+                <h2>Function calls</h2>
 
-                <p>All functions accept an <code>options</code> object as last argument. This object can have the
-                    following properties:</p>
+                <p>All functions will accept two parameters at least. The first can be an <code>options</code> object,
+                    the second can be an asynchronous callback function. The callback function is required on client
+                    side but optional on server side.</p>
 
-                <p><strong>callback</strong> <em>function(err, result)</em> (clientside)</p>
-
-                <p>The callback parameter is required on clientside and will be ignored on server side.</p>
+                <p>The <code>option</code> object is optional but required for some functionality of the API. It can
+                    have the following keys:</p>
 
                 <p><strong>key</strong> <em>string</em> (authenticated endpoints)</p>
 
                 <p>The key parameter is required for authenticated requests. You have to provide a valid API access
                     token with the correct scopes to request certain information. </p>
 
-                <p><strong>ids</strong> <em>int, string, [string] or [int]</em> (optional)</p>
+                <p><strong>ids</strong> <em>int, string, string[] or int[]</em> (optional)</p>
 
                 <p>You can set either one, multiple or no id, depending on the endpoint you want to request information
                     from.
@@ -270,7 +273,7 @@
                 <p>See the official <a href="http://docs.meteor.com/#/full/http_call">HTTP.call()</a> documentation for
                     details about the result object.</p>
 
-                <h2>Example</h2>
+                <h2>Examples</h2>
 
                 <h3>getBuild()</h3>
 
@@ -282,9 +285,7 @@
                     console.log(result);
                     }
 
-                    GW2API.getBuild({
-                    callback: printResult
-                    });</code></pre>
+                    GW2API.getBuild(printResult);</code></pre>
                 <h4>Result</h4><pre class="prettyprint source"><code>{
                     statusCode: 200,
                     content: '{&quot;id&quot;:53120}',
@@ -314,11 +315,10 @@
                     }
 
                     GW2API.getBuild({
-                    callback: printResult,
                     pageIndex: 0,
                     pageSize: 5,
                     language: 'de'
-                    });</code></pre>
+                    }, printResult);</code></pre>
                 <h4>Result</h4><pre class="prettyprint source"><code>{
                     statusCode: 200,
                     content: '[{&quot;id&quot;:1,&quot;name&quot;:&quot;Farbentferner&quot;,&quot;base_rgb&quot;:[128,26,26],&quot;cloth&quot;:{&quot;brightness&quot;:15,&quot;contrast&quot;:1.25,&quot;hue&quot;:38,&quot;saturation&quot;:0.28125,&quot;lightness&quot;:1.44531,&quot;rgb&quot;:[124,108,83]},&quot;leather&quot;:{&quot;brightness&quot;:-8,&quot;contrast&quot;:1,&quot;hue&quot;:34,&quot;saturation&quot;:0.3125,&quot;lightness&quot;:1.09375,&quot;rgb&quot;:[65,49,29]},&quot;metal&quot;:{&quot;brightness&quot;:5,&quot;contrast&quot;:1.05469,&quot;hue&quot;:38,&quot;saturation&quot;:0.101563,&quot;lightness&quot;:1.36719,&quot;rgb&quot;:[96,91,83]}},{&quot;id&quot;:2,&quot;name&quot;:&quot;Schwarz&quot;,&quot;base_rgb&quot;:[128,26,26],&quot;cloth&quot;:{&quot;brightness&quot;:-13,&quot;contrast&quot;:1,&quot;hue&quot;:275,&quot;saturation&quot;:0.0234375,&quot;lightness&quot;:1.09375,&quot;rgb&quot;:[37,35,38]},&quot;leather&quot;:{&quot;brightness&quot;:-13,&quot;contrast&quot;:1,&quot;hue&quot;:275,&quot;saturation&quot;:0.0234375,&quot;lightness&quot;:1.09375,&quot;rgb&quot;:[37,35,38]},&quot;metal&quot;:{&quot;brightness&quot;:-13,&quot;contrast&quot;:1,&quot;hue&quot;:275,&quot;saturation&quot;:0.0234375,&quot;lightness&quot;:1.09375,&quot;rgb&quot;:[37,35,38]}}]',
@@ -375,16 +375,33 @@
 
                 <h2>Making custom requests</h2>
 
-                <p>The <code>GW2API</code> object provides a function called <code>apiCall(endpoint, options)</code>
-                    which is internally called by all functions.</p>
+                <p>The <code>GW2API</code> object provides a function called <code>apiCall(endpoint, options,
+                    callback)</code> which is internally called by all functions.</p>
 
                 <p>The <code>endpoint</code> parameter specifies the endpoint relative to the API v2 base url. That's
                     currently <code>https://api.guildwars2.com/v2/</code>.</p>
 
-                <p>See <a href="#the-options-object">the <code>options</code> object</a> for details about the second
-                    parameter.</p>
+                <p>See <a href="#function-calls">Function calls</a> for details about the second parameter.</p>
 
                 <p>Please note: It's currently not possible to append custom HTTP request parameters.</p>
+
+                <h2>Error handling</h2>
+
+                <p>The API supports built in error handling as of version <em>1.0.3</em>. You can set a custom error
+                    handler function by calling <code>GW2API.setErrorHandler()</code> with a single argument.</p>
+
+                <p>This error handler will catch any error thrown by <code>HTTP.call()</code>. Depending on the thrown
+                    error, the error object may contain a key <code>response</code> that can be used to analyse any API
+                    error that's not a network error. This object will contain the same content as if the request was
+                    successful. That meaning the response object will contain keys like <code>statusCode</code> and
+                    <code>data</code>.</p>
+
+                <p><strong>Important:</strong></p>
+
+                <p>By design of the API, the server may respond with a HTTP-ErrorCode if you made a malformed request or
+                    provided invalid parameters. The API responds with a JSON-Object in most cases. This object will
+                    store a value <code>text</code> that describes the error. You can access this value like this:
+                    <code>var apiError = error.response.data.text</code>.</p>
 
                 <h2>Supported endpoints</h2>
 
@@ -642,12 +659,16 @@
                     <tr>
                         <td>wvw/objectives</td>
                         <td>getWvWObjectives()</td>
-                        <td>Unpublished endpoint</td>
+                        <td></td>
                     </tr>
                     </tbody>
                 </table>
             </article>
-    </section>
+        </section>
+
+
+
+
 
 
         <!-- disqus code -->
@@ -658,8 +679,8 @@
         <!-- // disqus code -->
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Sat Sep 19 2015
-            15:59:39 GMT+0200 (Mitteleuropäische Sommerzeit)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Fri Sep 25 2015
+            21:40:44 GMT+0200 (Mitteleuropäische Sommerzeit)
         </footer>
     </div>
 </div>
