@@ -12,46 +12,74 @@ GW2API =
      * The current max page size.
      *
      * @type {int}
-     * @static
+     *
+     * @readonly
      */
-    MAX_PAGE_SIZE: 200,
+    get MAX_PAGE_SIZE()
+    {
+        return 200
+    },
 
     /**
      * The current default page size.
      *
      * @type {int}
-     * @static
+     *
+     * @readonly
      */
-    DEFAULT_PAGE_SIZE: 50,
+    get DEFAULT_PAGE_SIZE()
+    {
+        return 50
+    },
 
     /**
      * The current base url of the api.
      *
      * @type {string}
-     * @static
+     *
+     * @readonly
      */
-    BASE_URL: 'https://api.guildwars2.com',
+    get BASE_URL()
+    {
+        return 'https://api.guildwars2.com'
+    },
 
     /**
      * The current version of the api.
      *
      * @type {string}
+     *
+     * @readonly
      * @static
      */
-    API_VERSION: 'v2',
+    get API_VERSION()
+    {
+        return 'v2'
+    },
+
+    /**
+     * The error handler that handles any HTTP.call() error.
+     *
+     * @type {function}
+     *
+     * @default
+     * @private
+     */
+    _errorHandler: null,
 
     /**
      * Returns the current build of the game.
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/build
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getBuild: function (options)
+    getBuild: function (options, callback)
     {
-        return GW2API.apiCall('build', options);
+        return GW2API.apiCall('build', options, _filterCallback(arguments));
     },
 
     /**
@@ -59,13 +87,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/tokeninfo
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getTokenInfo: function (options)
+    getTokenInfo: function (options, callback)
     {
-        return GW2API.apiCall('tokeninfo', options);
+        return GW2API.apiCall('tokeninfo', options, _filterCallback(arguments));
     },
 
     /**
@@ -73,13 +102,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/account
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getAccount: function (options)
+    getAccount: function (options, callback)
     {
-        return GW2API.apiCall('account', options);
+        return GW2API.apiCall('account', options, _filterCallback(arguments));
     },
 
     /**
@@ -87,13 +117,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/account/bank
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getAccountBank: function (options)
+    getAccountBank: function (options, callback)
     {
-        return GW2API.apiCall('account/bank', options);
+        return GW2API.apiCall('account/bank', options, _filterCallback(arguments));
     },
 
     /**
@@ -101,13 +132,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/account/dyes
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getAccountDyes: function (options)
+    getAccountDyes: function (options, callback)
     {
-        return GW2API.apiCall('account/dyes', options);
+        return GW2API.apiCall('account/dyes', options, _filterCallback(arguments));
     },
 
     /**
@@ -115,13 +147,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/account/materials
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getAccountMaterials: function (options)
+    getAccountMaterials: function (options, callback)
     {
-        return GW2API.apiCall('account/materials', options);
+        return GW2API.apiCall('account/materials', options, _filterCallback(arguments));
     },
 
     /**
@@ -129,13 +162,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/account/skins
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getAccountSkins: function (options)
+    getAccountSkins: function (options, callback)
     {
-        return GW2API.apiCall('account/skins', options);
+        return GW2API.apiCall('account/skins', options, _filterCallback(arguments));
     },
 
     /**
@@ -143,13 +177,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/account/wallet
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getAccountWallet: function (options)
+    getAccountWallet: function (options, callback)
     {
-        return GW2API.apiCall('account/wallet', options);
+        return GW2API.apiCall('account/wallet', options, _filterCallback(arguments));
     },
 
     /**
@@ -157,13 +192,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/characters
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getCharacters: function (options)
+    getCharacters: function (options, callback)
     {
-        return GW2API.apiCall('characters', options);
+        return GW2API.apiCall('characters', options, _filterCallback(arguments));
     },
 
     /**
@@ -173,17 +209,31 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/characters/inventory
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getCharacterInventory: function (options)
+    getCharacterInventory: function (options, callback)
     {
-        var ids = firstID(options);
+        var ids = _firstID(options);
+
+        if (!ids)
+        {
+            var error = new Meteor.Error(0, "You need to provided options.ids with one id.");
+
+            if (typeof callback !== 'undefined')
+            {
+                callback(error);
+                return;
+            }
+
+            throw error;
+        }
 
         delete options['ids'];
 
-        return GW2API.apiCall('characters/' + ids + "/inventory", options);
+        return GW2API.apiCall('characters/' + ids + "/inventory", options, _filterCallback(arguments));
     },
 
     /**
@@ -193,17 +243,31 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/characters/equipment
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getCharacterEquipment: function (options)
+    getCharacterEquipment: function (options, callback)
     {
-        var ids = firstID(options);
+        var ids = _firstID(options);
+
+        if (!ids)
+        {
+            var error = new Meteor.Error(0, "You need to provided options.ids with one id.");
+
+            if (typeof callback !== 'undefined')
+            {
+                callback(error);
+                return;
+            }
+
+            throw error;
+        }
 
         delete options['ids'];
 
-        return GW2API.apiCall('characters/' + ids + "/equipment", options);
+        return GW2API.apiCall('characters/' + ids + "/equipment", options, _filterCallback(arguments));
     },
 
     /**
@@ -214,17 +278,31 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/characters/recipes
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getCharacterRecipes: function (options)
+    getCharacterRecipes: function (options, callback)
     {
-        var ids = firstID(options);
+        var ids = _firstID(options);
+
+        if (!ids)
+        {
+            var error = new Meteor.Error(0, "You need to provided options.ids with one id.");
+
+            if (typeof callback !== 'undefined')
+            {
+                callback(error);
+                return;
+            }
+
+            throw error;
+        }
 
         delete options['ids'];
 
-        return GW2API.apiCall('characters/' + ids + "/recipes", options);
+        return GW2API.apiCall('characters/' + ids + "/recipes", options, _filterCallback(arguments));
     },
 
     /**
@@ -235,17 +313,31 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/characters/specializations
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getCharacterSpecializations: function (options)
+    getCharacterSpecializations: function (options, callback)
     {
-        var ids = firstID(options);
+        var ids = _firstID(options);
+
+        if (!ids)
+        {
+            var error = new Meteor.Error(0, "You need to provided options.ids with one id.");
+
+            if (typeof callback !== 'undefined')
+            {
+                callback(error);
+                return;
+            }
+
+            throw error;
+        }
 
         delete options['ids'];
 
-        return GW2API.apiCall('characters/' + ids + "/specializations", options);
+        return GW2API.apiCall('characters/' + ids + "/specializations", options, _filterCallback(arguments));
     },
 
     /**
@@ -253,13 +345,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/colors
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getColors: function (options)
+    getColors: function (options, callback)
     {
-        return GW2API.apiCall('colors', options);
+        return GW2API.apiCall('colors', options, _filterCallback(arguments));
     },
 
     /**
@@ -269,11 +362,12 @@ GW2API =
      *
      * @param {string} type - The type of the requested exchange rate. Either <i>coins</i> or <i>gems</i>.
      * @param {int} quantity - The requested quantity of the source currency.
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getCommerceExchange: function (type, quantity, options)
+    getCommerceExchange: function (type, quantity, options, callback)
     {
         if (type !== 'coins' && type !== 'gems')
             throw new Meteor.Error(0, "Endpoint /commerce/exchange requires either type 'coins' or 'gems'.");
@@ -283,7 +377,7 @@ GW2API =
 
         options['quantity'] = quantity;
 
-        return GW2API.apiCall('commerce/exchange' + type, options);
+        return GW2API.apiCall('commerce/exchange' + type, options, _filterCallback(arguments));
     },
 
     /**
@@ -291,13 +385,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/commerce/listings
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getCommerceListings: function (options)
+    getCommerceListings: function (options, callback)
     {
-        return GW2API.apiCall('commerce/listings', options);
+        return GW2API.apiCall('commerce/listings', options, _filterCallback(arguments));
     },
 
     /**
@@ -305,13 +400,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/commerce/prices
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getCommercePrices: function (options)
+    getCommercePrices: function (options, callback)
     {
-        return GW2API.apiCall('commerce/listings', options);
+        return GW2API.apiCall('commerce/listings', options, _filterCallback(arguments));
     },
 
     /**
@@ -321,11 +417,12 @@ GW2API =
      *
      * @param {string} scope - The requested scope. Either <i>history</is> or <i>current</i>.
      * @param {string} type - The transaction type. Either <i>sells</i> or <i>buys</i>.
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getCommerceTransactions: function (scope, type, options)
+    getCommerceTransactions: function (scope, type, options, callback)
     {
         if (scope !== 'history' && scope !== 'current')
             throw new Meteor.Error(0, "Endpoint /commerce/transactions requires either scope 'history' or 'current'.");
@@ -333,7 +430,7 @@ GW2API =
         if (type !== 'sells' && type !== 'buys')
             throw new Meteor.Error(0, "Endpoint /commerce/transactions requires either type 'sells' or 'buys'.");
 
-        return GW2API.apiCall('commerce/transactions/' + scope + '/' + type, options);
+        return GW2API.apiCall('commerce/transactions/' + scope + '/' + type, options, _filterCallback(arguments));
     },
 
     /**
@@ -341,13 +438,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/continents
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getContinents: function (options)
+    getContinents: function (options, callback)
     {
-        return GW2API.apiCall('continents', options);
+        return GW2API.apiCall('continents', options, _filterCallback(arguments));
     },
 
     /**
@@ -355,13 +453,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/currencies
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getCurrencies: function (options)
+    getCurrencies: function (options, callback)
     {
-        return GW2API.apiCall('currencies', options);
+        return GW2API.apiCall('currencies', options, _filterCallback(arguments));
     },
 
     /**
@@ -369,13 +468,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/events
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getEvents: function (options)
+    getEvents: function (options, callback)
     {
-        return GW2API.apiCall('events', options);
+        return GW2API.apiCall('events', options, _filterCallback(arguments));
     },
 
     /**
@@ -383,13 +483,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/events-state
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getEventsState: function (options)
+    getEventsState: function (options, callback)
     {
-        return GW2API.apiCall('events-state', options);
+        return GW2API.apiCall('events-state', options, _filterCallback(arguments));
     },
 
     /**
@@ -397,13 +498,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/files
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getFiles: function (options)
+    getFiles: function (options, callback)
     {
-        return GW2API.apiCall('files', options);
+        return GW2API.apiCall('files', options, _filterCallback(arguments));
     },
 
     /**
@@ -413,17 +515,31 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/guild
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getGuild: function (options)
+    getGuild: function (options, callback)
     {
-        var ids = firstID(options);
+        var ids = _firstID(options);
+
+        if (!ids)
+        {
+            var error = new Meteor.Error(0, "You need to provided options.ids with one id.");
+
+            if (typeof callback !== 'undefined')
+            {
+                callback(error);
+                return;
+            }
+
+            throw error;
+        }
 
         delete options['ids'];
 
-        return GW2API.apiCall('guild/' + ids, options);
+        return GW2API.apiCall('guild/' + ids, options, _filterCallback(arguments));
     },
 
     /**
@@ -433,17 +549,31 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/guild/inventory
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getGuildInventory: function (options)
+    getGuildInventory: function (options, callback)
     {
-        var ids = firstID(options);
+        var ids = _firstID(options);
+
+        if (!ids)
+        {
+            var error = new Meteor.Error(0, "You need to provided options.ids with one id.");
+
+            if (typeof callback !== 'undefined')
+            {
+                callback(error);
+                return;
+            }
+
+            throw error;
+        }
 
         delete options['ids'];
 
-        return GW2API.apiCall('guild/' + ids + '/inventory', options);
+        return GW2API.apiCall('guild/' + ids + '/inventory', options, _filterCallback(arguments));
     },
 
     /**
@@ -453,17 +583,31 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/guild/log
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getGuildLog: function (options)
+    getGuildLog: function (options, callback)
     {
-        var ids = firstID(options);
+        var ids = _firstID(options);
+
+        if (!ids)
+        {
+            var error = new Meteor.Error(0, "You need to provided options.ids with one id.");
+
+            if (typeof callback !== 'undefined')
+            {
+                callback(error);
+                return;
+            }
+
+            throw error;
+        }
 
         delete options['ids'];
 
-        return GW2API.apiCall('guild/' + ids + '/log', options);
+        return GW2API.apiCall('guild/' + ids + '/log', options, _filterCallback(arguments));
     },
 
     /**
@@ -473,17 +617,31 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/guild/members
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getGuildMembers: function (options)
+    getGuildMembers: function (options, callback)
     {
-        var ids = firstID(options);
+        var ids = _firstID(options);
+
+        if (!ids)
+        {
+            var error = new Meteor.Error(0, "You need to provided options.ids with one id.");
+
+            if (typeof callback !== 'undefined')
+            {
+                callback(error);
+                return;
+            }
+
+            throw error;
+        }
 
         delete options['ids'];
 
-        return GW2API.apiCall('guild/' + ids + '/members', options);
+        return GW2API.apiCall('guild/' + ids + '/members', options, _filterCallback(arguments));
     },
 
     /**
@@ -493,17 +651,31 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/guild/ranks
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getGuildRanks: function (options)
+    getGuildRanks: function (options, callback)
     {
-        var ids = firstID(options);
+        var ids = _firstID(options);
+
+        if (!ids)
+        {
+            var error = new Meteor.Error(0, "You need to provided options.ids with one id.");
+
+            if (typeof callback !== 'undefined')
+            {
+                callback(error);
+                return;
+            }
+
+            throw error;
+        }
 
         delete options['ids'];
 
-        return GW2API.apiCall('guild/' + ids + '/ranks', options);
+        return GW2API.apiCall('guild/' + ids + '/ranks', options, _filterCallback(arguments));
     },
 
     /**
@@ -513,17 +685,31 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/guild/permissions
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getGuildPermissions: function (options)
+    getGuildPermissions: function (options, callback)
     {
-        var ids = firstID(options);
+        var ids = _firstID(options);
+
+        if (!ids)
+        {
+            var error = new Meteor.Error(0, "You need to provided options.ids with one id.");
+
+            if (typeof callback !== 'undefined')
+            {
+                callback(error);
+                return;
+            }
+
+            throw error;
+        }
 
         delete options['ids'];
 
-        return GW2API.apiCall('guild/' + ids + '/permissions', options);
+        return GW2API.apiCall('guild/' + ids + '/permissions', options, _filterCallback(arguments));
     },
 
     /**
@@ -533,17 +719,31 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/guild/upgrades
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getGuildUpgrades: function (options)
+    getGuildUpgrades: function (options, callback)
     {
-        var ids = firstID(options);
+        var ids = _firstID(options);
+
+        if (!ids)
+        {
+            var error = new Meteor.Error(0, "You need to provided options.ids with one id.");
+
+            if (typeof callback !== 'undefined')
+            {
+                callback(error);
+                return;
+            }
+
+            throw error;
+        }
 
         delete options['ids'];
 
-        return GW2API.apiCall('guild/' + ids + '/upgrades', options);
+        return GW2API.apiCall('guild/' + ids + '/upgrades', options, _filterCallback(arguments));
     },
 
     /**
@@ -551,13 +751,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/items
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getItems: function (options)
+    getItems: function (options, callback)
     {
-        return GW2API.apiCall('items', options);
+        return GW2API.apiCall('items', options, _filterCallback(arguments));
     },
 
 
@@ -566,13 +767,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/leaderboards
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getLeaderBoards: function (options)
+    getLeaderBoards: function (options, callback)
     {
-        return GW2API.apiCall('leaderboards', options);
+        return GW2API.apiCall('leaderboards', options, _filterCallback(arguments));
     },
 
     /**
@@ -580,13 +782,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/maps
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getMaps: function (options)
+    getMaps: function (options, callback)
     {
-        return GW2API.apiCall('maps', options);
+        return GW2API.apiCall('maps', options, _filterCallback(arguments));
     },
 
     /**
@@ -594,13 +797,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/materials
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getMaterials: function (options)
+    getMaterials: function (options, callback)
     {
-        return GW2API.apiCall('materials', options);
+        return GW2API.apiCall('materials', options, _filterCallback(arguments));
     },
 
     /**
@@ -608,13 +812,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/pvp/stats
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getPvPStats: function (options)
+    getPvPStats: function (options, callback)
     {
-        return GW2API.apiCall('pvp/stats', options);
+        return GW2API.apiCall('pvp/stats', options, _filterCallback(arguments));
     },
 
     /**
@@ -622,13 +827,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/pvp/games
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getPvPGames: function (options)
+    getPvPGames: function (options, callback)
     {
-        return GW2API.apiCall('pvp/games', options);
+        return GW2API.apiCall('pvp/games', options, _filterCallback(arguments));
     },
 
     /**
@@ -636,13 +842,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/quaggans
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getQuaggans: function (options)
+    getQuaggans: function (options, callback)
     {
-        return GW2API.apiCall('quaggans', options);
+        return GW2API.apiCall('quaggans', options, _filterCallback(arguments));
     },
 
     /**
@@ -650,17 +857,18 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/recipes
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getRecipes: function (options)
+    getRecipes: function (options, callback)
     {
-        return GW2API.apiCall('recipes', options);
+        return GW2API.apiCall('recipes', options, _filterCallback(arguments));
     },
 
     /**
-     * Returns information ids of crafting recipes with the involved input or output material specified by parameters.
+     * Returns ids of crafting recipes with the involved input or output material specified by parameters.
      *
      * <b>IMPORTANT:</b> It's not possible to provide multiple ids nor setting both output and output.
      *
@@ -668,11 +876,12 @@ GW2API =
      *
      * @param {int} input - The id of an input item.
      * @param {int} output - The id of an output item.
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    searchRecipes: function (input, output, options)
+    searchRecipes: function (input, output, options, callback)
     {
         if ((input && output) || (options['input'] && options['output']))
         {
@@ -692,7 +901,7 @@ GW2API =
             throw new Meteor.Error(0, "You must provide either input or input.");
         }
 
-        return GW2API.apiCall('recipes/search', options);
+        return GW2API.apiCall('recipes/search', options, _filterCallback(arguments));
     },
 
     /**
@@ -700,13 +909,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/skins
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getSkins: function (options)
+    getSkins: function (options, callback)
     {
-        return GW2API.apiCall('skins', options);
+        return GW2API.apiCall('skins', options, _filterCallback(arguments));
     },
 
     /**
@@ -714,13 +924,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/skills
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getSkills: function (options)
+    getSkills: function (options, callback)
     {
-        return GW2API.apiCall('skills', options);
+        return GW2API.apiCall('skills', options, _filterCallback(arguments));
     },
 
     /**
@@ -728,13 +939,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/specializations
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getSpecializations: function (options)
+    getSpecializations: function (options, callback)
     {
-        return GW2API.apiCall('specializations', options);
+        return GW2API.apiCall('specializations', options, _filterCallback(arguments));
     },
 
     /**
@@ -742,13 +954,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/traits
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getTraits: function (options)
+    getTraits: function (options, callback)
     {
-        return GW2API.apiCall('traits', options);
+        return GW2API.apiCall('traits', options, _filterCallback(arguments));
     },
 
     /**
@@ -756,13 +969,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/traits-beta
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getTraitsBeta: function (options)
+    getTraitsBeta: function (options, callback)
     {
-        return GW2API.apiCall('traits-beta', options);
+        return GW2API.apiCall('traits-beta', options, _filterCallback(arguments));
     },
 
     /**
@@ -770,13 +984,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/worlds
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getWorlds: function (options)
+    getWorlds: function (options, callback)
     {
-        return GW2API.apiCall('worlds', options);
+        return GW2API.apiCall('worlds', options, _filterCallback(arguments));
     },
 
     /**
@@ -784,13 +999,14 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/wvw/matches
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getWvWMatches: function (options)
+    getWvWMatches: function (options, callback)
     {
-        return GW2API.apiCall('wvw/matches', options);
+        return GW2API.apiCall('wvw/matches', options, _filterCallback(arguments));
     },
 
     /**
@@ -798,42 +1014,50 @@ GW2API =
      *
      * @see http://wiki.guildwars2.com/wiki/API:2/wvw/objectives
      *
-     * @param {object} [options] - See {@link GW2API.apiCall}
+     * @param {object} [options] - See {@link GW2API.apiCall}.
+     * @param {function} [callback] - See {@link GW2API.apiCall}..
+     * @param {function} [callback] - See {@link GW2API.apiCall}.
      *
      * @throws Meteor.Error
      */
-    getWvWObjectives: function (options)
+    getWvWObjectives: function (options, callback)
     {
-        return GW2API.apiCall('wvw/matches', options);
+        return GW2API.apiCall('wvw/objectives', options, _filterCallback(arguments));
     },
 
     /**
      * Prepares and sends a raw request to the api server.
      *
      * @param {string} endpoint - The requested endpoint.
-     * @param {object} options - The option object. Possible parameters:
-     * @param {function} options.callback - Required on client side.
-     * @param {(string|int|int[]|string[])} options.ids - The requested ids. Not available on endpoints without id in
+     * @param {object} [options] - The option object. Possible parameters:
+     * @param {(string|int|int[]|string[])} [options.ids] - The requested ids. Not available on endpoints without id in
      *  its result set. Either an array of ids or a comma-separated list of ids or a single id. Depending on the
      *  endpoint, it's also possible to provide alphanumerical ids such as GUIDs.
-     * @param {int} options.pageIndex - Will request a specific page of a result set for endpoints with bulk enabled
+     * @param {int} [options.pageIndex] - Will request a specific page of a result set for endpoints with bulk enabled
      *  requests.
-     * @param {int} options.pageSize - The size of the requested pages. Needs to be set with <b>options.pageIndex</b>.
-     * @param {string} options.key - The authentication key that grants access to the requested endpoint. Only
+     * @param {int} [options.pageSize] - The size of the requested pages. Needs to be set with
+     *     <b>options.pageIndex</b>.
+     * @param {string} [options.key] - The authentication key that grants access to the requested endpoint. Only
      *  needed for authenticated endpoints.
-     * @param {string} options.language - Only available for endpoints with language awareness. Defines the
+     * @param {string} [options.language] - Only available for endpoints with language awareness. Defines the
      *  requested language. The API server will return the language that your browser provides when language is
      *     omitted.
-     * @param {int} options.quantity - Only available for endpoint v2/commerce/exchange. See {@link
+     * @param {int} [options.quantity] - Only available for endpoint v2/commerce/exchange. See {@link
         *     GW2API.getCommerceExchange}.
-     * @param {int} options.input - Only available for endpoint v2/recipes/search. See {@link GW2API.searchRecipes}.
-     * @param {int} options.output - Only available for endpoint v2/recipes/search. See {@link GW2API.searchRecipes}.
+     * @param {int} [options.input] - Only available for endpoint v2/recipes/search. See {@link GW2API.searchRecipes}.
+     * @param {int} [options.output] - Only available for endpoint v2/recipes/search. See {@link GW2API.searchRecipes}.
+     * @param {function} [callback] - A callback that will be called after the API sends a response. The function will
+     *   get two parameters <i>error</i> and <i>result</i>. See {@link
+        *     http://docs.meteor.com/#/full/http_call|HTTP.call()} for details.
      *
-     * @return {object} Returns the response object of the HTTP request.
+     * @return {object} The result object of the HTTP request. See {@link
+        *     http://docs.meteor.com/#/full/http_call|HTTP.call()} for details.
      *
-     * @throws Meteor.Error
+     * @throws Meteor.Error This function will throw any {@link
+        *     http://docs.meteor.com/#/full/http_call|HTTP.call()} error untouched unless you override the error
+     *     handling with {@link GW2API.setErrorHandler}.
      */
-    apiCall: function (endpoint, options)
+    apiCall: function (endpoint, options, callback)
     {
         if (!endpoint) throw new Meteor.Error(0, 'No endpoint set.');
 
@@ -844,7 +1068,7 @@ GW2API =
             if (options['ids'])
                 queryParameters.ids = typeof options['ids'] === 'array' ? options['ids'].join(',') : options['ids'];
 
-            if (options['pageIndex'] && options['pageIndex'] >= 0)
+            if ((options['pageIndex'] && options['pageIndex'] >= 0) || options['pageIndex'] === 0)
                 queryParameters['page'] = options['pageIndex'];
 
             if (options['pageSize'] && options['pageSize'] <= GW2API.MAX_PAGE_SIZE)
@@ -872,31 +1096,63 @@ GW2API =
 
         var asyncCall = Meteor.wrapAsync(httpRequest);
 
-        if (Meteor.isServer)
+        callback = _filterCallback(arguments);
+
+        if (Meteor.isServer && typeof callback !== 'function')
         {
-            return asyncCall();
+            try
+            {
+                return asyncCall();
+            }
+            catch (error)
+            {
+                // either handle error by GW2API._errorHandler
+                // or throw the error without handling
+
+                if (typeof GW2API._errorHandler === 'function')
+                    GW2API._errorHandler(error);
+                else
+                    throw error;
+            }
+        }
+        else if (typeof callback === 'function')
+        {
+            return asyncCall(_internalErrorHandling);
         }
         else
         {
-            if (!options || typeof options['callback'] !== 'function')
-                throw new Meteor.Error(0, "GW2API calls need a callback on client side.");
-
-            asyncCall(options['callback']);
+            throw new Meteor.Error(0, "Must provide a callback for GW2API functions on client side.");
         }
 
-        function httpRequest(callback)
+        function httpRequest(cb)
         {
-            if (Object.keys(queryParameters).length === 0)
-            {
-                HTTP.get(requestURL, callback);
-            }
-            else
-            {
-                HTTP.get(requestURL, {
-                    params: queryParameters
-                }, callback);
-            }
+            HTTP.get(requestURL, {
+                params: queryParameters
+            }, cb);
         }
+
+        function _internalErrorHandling(error, result)
+        {
+            if (!!error && typeof GW2API._errorHandler === 'function')
+                GW2API._errorHandler(error, result);
+            else
+                callback(error, result);
+        }
+    },
+
+    /**
+     * This function will set an error handler that handles any error that is thrown by  {@link
+        *     http://docs.meteor.com/#/full/http_call|HTTP.call()}.
+     *
+     * @param {function} errorHandler - The error handler. The function will receive any error thrown by {@link
+        *     http://docs.meteor.com/#/full/http_call|HTTP.call()}.
+     */
+    setErrorHandler: function (errorHandler)
+    {
+        if (typeof errorHandler !== 'function')
+            throw new Meteor.Error(0, 'The error handler must be a function.');
+
+        GW2API._errorHandler = errorHandler;
     }
 };
 
@@ -907,7 +1163,7 @@ GW2API =
  *
  * @private
  */
-firstID = function (options)
+_firstID = function (options)
 {
     if (options['ids'])
     {
@@ -919,5 +1175,31 @@ firstID = function (options)
         {
             return options['ids'];
         }
+    }
+
+    return false;
+};
+
+/**
+ * Searches an array for the last occurrence of a function an returns that function.
+ *
+ * @param {Array} args An array of arguments.
+ *
+ * @private
+ * @returns {undefined|function} Returns either the found function or undefined if no function was found.
+ */
+_filterCallback = function (args)
+{
+    if (args instanceof Array)
+        return;
+
+    var i = (args.length - 1);
+
+    for (i; i >= 0; i--)
+    {
+        var current = args[i];
+
+        if (typeof current === 'function')
+            return current;
     }
 };

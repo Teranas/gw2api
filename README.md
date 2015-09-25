@@ -6,6 +6,27 @@ It's supporting bulk requests, paged requests and language control.
 
 View the docs at https://teranas.github.io/gw2api.
 
+## Table of Contents
+
+- [Installation](#installation)
+- [Function calls](#function-calls)
+- [The result object](#the-result-object)
+- [Example](#example)
+  - [getBuild()](#getbuild)
+    - [Server side](#server-side)
+    - [Client side](#client-side)
+    - [Result](#result)
+  - [getColors()](#getcolors)
+    - [Server side](#server-side-1)
+    - [Client side](#client-side-1)
+    - [Result](#result-1)
+- [Special functions](#special-functions)
+  - [getCommerceExchange(type, quantity, options)](#getcommerceexchangetype-quantity-options)
+  - [searchRecipes(input, output, options)](#searchrecipesinput-output-options)
+- [Making custom requests](#making-custom-requests)
+- [Error handling](#error-handling)
+- [Supported endpoints](#supported-endpoints)
+
 ## Installation
 
 Simply run the following command inside your meteor project:
@@ -14,19 +35,17 @@ Simply run the following command inside your meteor project:
 
 You can now start using the API by calling functions of the global `GW2API` object.
 
-## The `options` object
+## Function calls
 
-All functions accept an `options` object as last argument. This object can have the following properties:
+All functions will accept two parameters at least. The first can be an ``options`` object, the second can be an asynchronous callback function. The callback function is required on client side but optional on server side.
 
-**callback** *function(err, result)*  (clientside)
-
-The callback parameter is required on clientside and will be ignored on server side.
+The ``option`` object is optional but required for some functionality of the API. It can have the following keys:
 
 **key** *string* (authenticated endpoints)
 
 The key parameter is required for authenticated requests. You have to provide a valid API access token with the correct scopes to request certain information. 
 
-**ids** *int, string, [string] or [int]* (optional)
+**ids** *int, string, string[] or int[]* (optional)
 
 You can set either one, multiple or no id, depending on the endpoint you want to request information from. 
 *Note: You can only provide one id for all sub endpoints of the `character` endpoint.*
@@ -50,7 +69,7 @@ Calling any `GW2API` function from server side will return the result object dir
 
 See the official [HTTP.call()](http://docs.meteor.com/#/full/http_call) documentation for details about the result object.
 
-## Example
+## Examples
 
 ### getBuild()
 
@@ -70,9 +89,7 @@ function printResult(error, result)
   console.log(result);
 }
 
-GW2API.getBuild({
-  callback: printResult
-});
+GW2API.getBuild(printResult);
 ```
 
 #### Result
@@ -118,11 +135,10 @@ function printResult(error, result)
 }
 
 GW2API.getBuild({
-  callback: printResult,
   pageIndex: 0,
   pageSize: 5,
   language: 'de'
-});
+}, printResult);
 ```
 
 #### Result
@@ -182,14 +198,23 @@ The ``searchRecipes(input, output, options)`` function accepts additional parame
 
 ## Making custom requests
 
-The ``GW2API`` object provides a function called ``apiCall(endpoint, options)`` which is internally called by all functions.
+The ``GW2API`` object provides a function called ``apiCall(endpoint, options, callback)`` which is internally called by all functions.
 
 The ``endpoint`` parameter specifies the endpoint relative to the API v2 base url. That's currently ``https://api.guildwars2.com/v2/``.
 
-See [the ``options`` object](#the-options-object) for details about the second parameter.
+See [Function calls](#function-calls) for details about the second parameter.
 
 Please note: It's currently not possible to append custom HTTP request parameters.
 
+## Error handling
+
+The API supports built in error handling as of version *1.0.3*. You can set a custom error handler function by calling ``GW2API.setErrorHandler()`` with a single argument.
+
+This error handler will catch any error thrown by ``HTTP.call()``. Depending on the thrown error, the error object may contain a key ``response`` that can be used to analyse any API error that's not a network error. This object will contain the same content as if the request was successful. That meaning the response object will contain keys like ``statusCode`` and ``data``.
+
+**Important:**
+
+By design of the API, the server may respond with a HTTP-ErrorCode if you made a malformed request or provided invalid parameters. The API responds with a JSON-Object in most cases. This object will store a value ``text`` that describes the error. You can access this value like this: ``var apiError = error.response.data.text``.
 
 ## Supported endpoints
 
@@ -245,4 +270,4 @@ traits                         | getTraits() |
 traits-beta                    | getTraitsBeta() |
 worlds                         | getWorlds() |
 wvw/matches                    | getWvWMatches() | Unpublished endpoint
-wvw/objectives                 | getWvWObjectives() | Unpublished endpoint
+wvw/objectives                 | getWvWObjectives() | 
