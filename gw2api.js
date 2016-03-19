@@ -375,9 +375,12 @@ GW2API =
         if (!quantity)
             throw new Meteor.Error(0, "Endpoint /commerce/exchange requires a quantity attribute.");
 
+        if (!options)
+            options = {};
+
         options['quantity'] = quantity;
 
-        return GW2API.apiCall('commerce/exchange' + type, options, _filterCallback(arguments));
+        return GW2API.apiCall('commerce/exchange/' + type, options, _filterCallback(arguments));
     },
 
     /**
