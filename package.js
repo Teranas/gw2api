@@ -6,6 +6,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
+  api.versionsFrom("1.1");
   api.use('http', ['client', 'server']);
   api.export('GW2API');
   api.addFiles("GW2API.js", ['client', 'server']);
